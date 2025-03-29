@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature & Humidity</title>
+</head>
+<body>
+<p>Temperature: <span id="temp">Loading...</span></p>
+<p>Humidity: <span id="humidity">Loading...</span></p>
+
+<script>
+    function updateData() {
+        const temp = document.getElementById("temp")
+        const humidity = document.getElementById("humidity")
+
+        fetch("/api/get_sensor_data", { method: "GET" }
+        ).then((res) => {
+            res.json().then((body) => {
+                temp.innerText = `${body.temp}C`
+                humidity.innerText = `${body.humidity}%`
+                setTimeout(updateData, 2000)
+            })
+        })
+    }
+
+    updateData()
+</script>
+</body>
+</html>
