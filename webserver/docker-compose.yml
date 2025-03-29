@@ -4,14 +4,8 @@ services:
       context: .
     restart: unless-stopped
     hostname: cs596-lab3
-    expose:
+    ports:
       - 8080:8080/tcp
-    networks:
-      - caddynet
     env_file:
       - .env
 
-networks:
-  caddynet:
-    name: caddy_net
-    external: true
